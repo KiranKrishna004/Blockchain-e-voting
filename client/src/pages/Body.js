@@ -2,13 +2,28 @@ import React, { useState } from "react"
 // import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import { useHistory } from "react-router-dom"
 
-const Body = ({ candidate1, candidate2, votecandidate, account }) => {
+const Body = ({ candidate1, candidate2, account, setloader, Electionsm }) => {
   const history = useHistory()
   const [Candidate, setCandidate] = useState("")
 
   const onchange = (e) => {
     setCandidate(e.target.value)
     console.log(e.target.value)
+  }
+
+  const votecandidate = async (candidateid) => {
+    setloader(true)
+    try {
+      await Electionsm.methods
+        .vote(candidateid)
+        .send({ from: account })
+        .on("transactionhash", () => {
+          console.log("succesfully ran")
+        })
+    } catch (e) {
+      history.push("/redirect")
+    }
+    setloader(false)
   }
 
   const onsubmit = (e) => {

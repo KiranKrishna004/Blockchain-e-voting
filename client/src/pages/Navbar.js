@@ -9,7 +9,7 @@ const Navbar = ({ account }) => {
     >
       <img src={x} className="emblem" alt="welp" />
       <ul className="navbar-nav">
-        <li className="nav-item text-white"> </li>
+        <li className="nav-item text-black h5">Voting </li>
       </ul>
     </nav>
   )

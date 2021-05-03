@@ -107,6 +107,8 @@ function App() {
               candidate2={Candidate2}
               votecandidate={votecandidate}
               account={Currentaccount}
+              setloader={setloader}
+              Electionsm={Electionsm}
             />
           </Route>
           <Route path="/thank">
