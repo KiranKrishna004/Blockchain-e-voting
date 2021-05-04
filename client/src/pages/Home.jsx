@@ -8,7 +8,7 @@ const Home = () => {
       <div className="frame p-4 d-flex flex-column justify-content-around align-items-center">
         <h2 className="p-2">Make your voice heard</h2>
         <Link
-          to="/candidate"
+          to="/register"
           className="bn-32 bn32"
           style={{ backgroundColor: "#14213d", color: "#ffffff" }}
         >

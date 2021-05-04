@@ -10,6 +10,7 @@ import Redirect from "./pages/Redirect"
 import "./App.css"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import { useHistory } from "react-router-dom"
+import Register from "./pages/Register"
 
 function App() {
   const history = useHistory()
@@ -17,7 +18,7 @@ function App() {
     loadWeb3()
     LoadBlockchaindata()
   }, [])
-
+  const [number, setNumber] = useState("")
   const [Currentaccount, setCurrentaccount] = useState("")
   const [loader, setloader] = useState(true)
   const [Electionsm, SetElectionsm] = useState()
@@ -98,6 +99,7 @@ function App() {
           <Link to="/thank"></Link>
           <Link to="/candidate"></Link>
           <Link to="/redirect"></Link>
+          <Link to="/register"></Link>
         </div>
 
         <Switch>
@@ -113,6 +115,9 @@ function App() {
           </Route>
           <Route path="/thank">
             <Thank />
+          </Route>
+          <Route path="/register">
+            <Register number={number} setNumber={setNumber} />
           </Route>
           <Route path="/redirect">
             <Redirect />

@@ -15,7 +15,7 @@ const Redirect = () => {
         />
         <h3 className="mb-5 candidate1">Transaction was Rejected</h3>
         <Link
-          to="/vote"
+          to="/"
           className="bn-32 bn32 mb-5"
           style={{ backgroundColor: "#14213d", color: "#ffffff" }}
         >
