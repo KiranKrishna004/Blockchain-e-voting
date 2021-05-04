@@ -18,7 +18,8 @@ function App() {
     loadWeb3()
     LoadBlockchaindata()
   }, [])
-  const [number, setNumber] = useState("")
+  const [email, setEmail] = useState("")
+  const [pass, setPass] = useState("")
   const [Currentaccount, setCurrentaccount] = useState("")
   const [loader, setloader] = useState(true)
   const [Electionsm, SetElectionsm] = useState()
@@ -117,7 +118,12 @@ function App() {
             <Thank />
           </Route>
           <Route path="/register">
-            <Register number={number} setNumber={setNumber} />
+            <Register
+              email={email}
+              setEmail={setEmail}
+              pass={pass}
+              setPass={setPass}
+            />
           </Route>
           <Route path="/redirect">
             <Redirect />

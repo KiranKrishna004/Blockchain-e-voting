@@ -32,7 +32,10 @@ body {
   height: 70px;
   width: 90px;
 }
-
+.login {
+  width: 100%;
+  height: 100%;
+}
 .banner {
   border: 20px;
   border-radius: 1rem;

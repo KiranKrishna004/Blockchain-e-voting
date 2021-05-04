@@ -2,51 +2,74 @@ import React, { useState } from "react"
 import firebase from "../components/firebase"
 import { useHistory } from "react-router-dom"
 
-const Register = ({ number, setNumber }) => {
+const Register = ({ email, setEmail, pass, setPass }) => {
   const history = useHistory()
+
   const handleClick = (event) => {
     event.preventDefault()
-    let recaptcha = new firebase.auth.RecaptchaVerifier("recaptcha-container")
-    let number = "+919482186959"
-    console.log(number)
+    firebase.auth().useDeviceLanguage()
     firebase
       .auth()
-      .signInWithPhoneNumber(`${number}`, recaptcha)
-      .then(function (e) {
-        let code = prompt("enter the OTP: ")
-        if (code == null) return
-        e.confirm(code)
-          .then(function (result) {
-            console.log(result.user, "user")
-            document.querySelector("label").textContent =
-              result.user.phoneNumber + ": Number Verfied"
-            history.push("/candidate")
-          })
-          .catch((e) => {
-            console.log("Error:", e)
-          })
+      .signInWithEmailAndPassword(email, pass)
+      .then((userCredential) => {
+        // Signed in
+        var user = userCredential.user
+        alert("Autherized User Logged-in")
+        history.push("/candidate")
+        // ...
+      })
+      .catch((error) => {
+        var errorCode = error.code
+        var errorMessage = error.message
+        alert("Un-autherized User")
+        console.log("error code: ", errorCode)
+        console.log("error message: ", errorMessage)
       })
   }
 
-  const handleChange = (event) => {
-    console.log(event.target.value)
-    setNumber(event.target.value)
+  const handleChangeEmail = (event) => {
+    setEmail(event.target.value)
+  }
+  const handleChangePass = (event) => {
+    setPass(event.target.value)
   }
 
   return (
     <div className="App">
       <div className="App d-flex flex-column justify-content-center align-items-center">
-        <h3 className="m-5">Log-in</h3>
-        <form
-          className="banner d-flex flex-column justify-content-center align-items-center"
-          onSubmit={handleClick}
-        >
-          <div className="m-3 h4">
-            PhoneNumber:{" "}
-            <input type="text" value={number} onChange={handleChange} />
-          </div>
-          <button className="bn32 bn-32">Submit</button>
-        </form>
+        <div className="login d-flex flex-column justify-content-center align-items-center">
+          <form
+            className="banner w-50 h-50 d-flex flex-column justify-content-center align-items-center"
+            onSubmit={handleClick}
+          >
+            <h3 className="mb-5">Log-in</h3>
+            <div className="form-group w-75">
+              <label htmlFor="exampleInputEmail1">Email address</label>
+              <input
+                type="email"
+                className="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                placeholder="Enter email"
+                onChange={handleChangeEmail}
+              />
+              <small id="emailHelp" className="form-text text-muted">
+                We'll never share your email with anyone else.
+              </small>
+            </div>
+            <div className="form-group w-75">
+              <label htmlFor="exampleInputPassword1">Password</label>
+              <input
+                type="password"
+                className="form-control"
+                id="exampleInputPassword1"
+                placeholder="Password"
+                onChange={handleChangePass}
+              />
+            </div>
+            <button className="bn32 bn-32 mt-4">Submit</button>
+          </form>
+        </div>
         <label id="recaptcha-container"></label>
       </div>
     </div>
